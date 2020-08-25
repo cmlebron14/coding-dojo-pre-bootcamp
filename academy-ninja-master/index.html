@@ -1,30 +1,123 @@
 <html>
-<body>
-	<div id='background'>
-        <div id='character' style='position:absolute; top:100px; left:450px; background-image: url("img/down1.png"); width:59px; height:86px;'></div>
+  <body>
+    <div id="background">
+      <div
+        id="character"
+        style="
+          position: absolute;
+          top: 100px;
+          left: 450px;
+          background-image: url('img/down1.png');
+          width: 59px;
+          height: 86px;
+        "
+      ></div>
     </div>
     <script type="text/javascript">
-	    var leftValue = 450, topValue = 100;
+      var leftValue = 450;
+      var topValue = 100;
 
-    	function update(){
-    		document.getElementById("character").style.left = leftValue+"px";
-    		document.getElementById("character").style.top = topValue+"px";
-    	}
+      function update() {
+        document.getElementById("character").style.left = leftValue + "px";
+        document.getElementById("character").style.top = topValue + "px";
+      }
 
-    	document.onkeydown = function(e){
-    		console.log(e);
-    		if(e.keyCode == 37) { // LEFT
-    			leftValue = leftValue - 10;
-    		}
-    		else if (e.keyCode == 39) { // RIGHT
-    			leftValue = leftValue + 10;    		
-    		}
-    		else if (e.keyCode == 40) { // DOWN
-				topValue = topValue + 10;
-    		}
-    		// ...
-    		update();
-    	}
+      function updateLeftOdd() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/left1.png")';
+        update();
+      }
+
+      function updateLeftEven() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/left2.png")';
+        update();
+      }
+
+      function updateRightOdd() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/right1.png")';
+        update();
+      }
+
+      function updateRightEven() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/right2.png")';
+        update();
+      }
+
+      function updateTopOdd() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/top1.png")';
+        update();
+      }
+
+      function updateTopEven() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/top2.png")';
+        update();
+      }
+
+      function updateDownOdd() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/down1.png")';
+        update();
+      }
+
+      function updateDownEven() {
+        document.getElementById("character").style.backgroundImage =
+          'url("img/down2.png")';
+        update();
+      }
+
+      var leftCounter = 0;
+      var rightCounter = 0;
+      var topCounter = 0;
+      var downCounter = 0;
+
+      document.onkeydown = function (e) {
+        if (e.keyCode == 37) {
+          if (leftValue > 0) {
+            leftValue = leftValue - 10;
+            leftCounter++;
+            if (leftCounter % 2 == 0) {
+              updateLeftEven();
+            } else {
+              updateLeftOdd();
+            }
+          }
+        } else if (e.keyCode == 39) {
+          if (leftValue < 500) {
+            leftValue = leftValue + 10;
+            rightCounter++;
+            if (rightCounter % 2 == 0) {
+              updateRightEven();
+            } else {
+              updateRightOdd();
+            }
+          }
+        } else if (e.keyCode == 40) {
+          if (topValue < 500) {
+            topValue = topValue + 10;
+            downCounter++;
+            if (downCounter % 2 == 0) {
+              updateDownEven();
+            } else {
+              updateDownOdd();
+            }
+          }
+        } else if (e.keyCode == 38) {
+          if (topValue > 0) {
+            topValue = topValue - 10;
+            topCounter++;
+            if (topCounter % 2 == 0) {
+              updateTopEven();
+            } else {
+              updateTopOdd();
+            }
+          }
+        }
+      };
     </script>
-</body>
+  </body>
 </html>
