@@ -1,25 +1,28 @@
 var world = [
   [1,1,1,1,1,1,1,1,1,1],
-  [1,0,0,0,1,2,1,0,0,1],
+  [1,0,0,0,1,2,1,0,3,1],
   [1,0,1,0,1,0,0,0,1,1],
   [1,0,1,2,1,1,1,0,0,1],
   [1,0,1,0,0,1,0,0,1,1],
   [1,0,1,1,0,1,1,0,2,1],
   [1,2,1,0,0,0,0,0,1,1],
-  [1,0,0,0,1,0,1,2,0,1],
+  [1,0,0,3,1,0,1,2,0,1],
   [1,1,1,1,1,1,1,1,1,1]
 ];
 
 var worldDict = {
   0: "blank",
   1: "wall",
-  2: "sushi"
+  2: "sushi",
+  3: "onigiri"
 }
 
 var ninjaman = {
   x: 1,
   y: 1
 }
+
+var score = 0;
 
 function drawWorld() {
   var output = "";
@@ -33,6 +36,7 @@ function drawWorld() {
     output += "</div>";
 
   }
+  output += `<div class="row score">Score: ${score}</div>`;
 
   document.getElementById("world").innerHTML = output;
 }
@@ -67,8 +71,14 @@ document.onkeydown = function(e) {
   }
 
   //clear sushi
+  if (world[ninjaman.x][ninjaman.y] == 2) {
+    score += 10;
+  } else if (world[ninjaman.x][ninjaman.y] == 3) {
+    score += 5;
+  }
   world[ninjaman.x][ninjaman.y] = 0;
 
   drawWorld();
   drawNinjaman();
+
 }
